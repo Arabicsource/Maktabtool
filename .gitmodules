@@ -1,3 +1,6 @@
 [submodule "LucenePlusPlus"]
 	path = LucenePlusPlus
 	url = https://github.com/luceneplusplus/LucenePlusPlus
+[submodule "mdbtools"]
+	path = mdbtools
+	url = https://github.com/brianb/mdbtools
