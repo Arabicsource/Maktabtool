@@ -14,19 +14,24 @@
  * File class represents an actual file we can read and write to.
  */
 
-class File{
+class File {
 
     private:
-	std::ifstream*		m_file;
-	int			m_size;
-	std::string		m_name;
-	std::vector<char>	m_data;
+	int				m_size;
+	std::string			m_name;
+	std::vector<char>		m_data;
 
     public:
-	File() noexcept;
+	std::shared_ptr<std::fstream>	m_file;
+
 	void read(std::unique_ptr<std::vector<char>> buffer);
-	static std::unique_ptr<File> Open(std::string path);
+	int size();
+	std::string name();
+	std::vector<char> data();
+	static std::shared_ptr<File> open(std::string path, std::ios_base::openmode mode);
+
+
+	File() noexcept;
 
 };
-
 #endif

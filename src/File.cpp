@@ -8,16 +8,18 @@
 
 File::File() noexcept
 {
-   int m_size = 0;
-   std::string m_name = "";
-   std::vector<char> m_data; 
+    std::shared_ptr<std::fstream> m_file(nullptr);
+    int m_size(0);
+    std::string m_name("");
+    std::vector<char> m_data(m_size); 
 }
 
-std::unique_ptr<File> File::Open(std::string path)
+// open opens up a file and accessible through m_file member 
+std::shared_ptr<File> File::open(std::string path, std::ios_base::openmode mode)
 {
-    std::unique_ptr<File> f;
+    std::shared_ptr<File> f = std::shared_ptr<File>(new File());
 
-    f->m_file->open(path, std::ios::binary);
+    f->m_file->open(path, mode);
 
     if(f->m_file->fail())
     {
@@ -38,6 +40,7 @@ std::unique_ptr<File> File::Open(std::string path)
 }
 
 
+// read reads the file's content into a buffer passed as a parameter
 void File::read(std::unique_ptr<std::vector<char>> buffer)
 {
 
@@ -46,3 +49,20 @@ void File::read(std::unique_ptr<std::vector<char>> buffer)
 
 }
 
+// size returns the size of the File
+int File::size()
+{
+    return this->m_size;
+}
+
+// name returns the name of the file in string
+std::string File::name()
+{
+    return this->m_name;
+}
+
+// data returns the data in a vector
+std::vector<char> File::data()
+{
+    return this->m_data;
+}
