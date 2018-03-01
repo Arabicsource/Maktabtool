@@ -24,14 +24,14 @@ class File {
     public:
 	std::shared_ptr<std::fstream>	m_file;
 
-	void read(std::unique_ptr<std::vector<char>> buffer);
+	void read(std::unique_ptr<std::vector<char> > buffer);
 	int size();
 	std::string name();
 	std::vector<char> data();
 	static std::shared_ptr<File> open(std::string path, std::ios_base::openmode mode);
 
 
-	File() noexcept;
+	File();
 
 };
 #endif

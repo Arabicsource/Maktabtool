@@ -2,7 +2,8 @@ cmake_minimum_required(VERSION 3.10)
 include(${CMAKE_ROOT}/Modules/ExternalProject.cmake)
 
     ExternalProject_Add(mdbtools
-	    URL https://github.com/brianb/mdbtools
+	    GIT_REPOSITORY https://github.com/brianb/mdbtools
+	    GIT_TAG master
 	    PREFIX ${CMAKE_CURRENT_BINARY_DIR}/mdbtools
 	    CONFIGURE_COMMAND "autoreconf -i -f" COMMAND "./configure --with-unixodbc=/usr/local --disable-man"
 	    BUILD_COMMAND make

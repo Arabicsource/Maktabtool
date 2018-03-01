@@ -19,8 +19,6 @@ struct LOG_ENTRY_LINE
     std::time_t	timestamp;
     LOG_LEVEL	level;
     std::string	msg;
-
-
 };
 
 class Log 
