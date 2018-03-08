@@ -9,12 +9,46 @@
 #include<memory>
 
 
+class Reader
+{
+    public:
+	virtual bool read(std::shared_ptr<std::vector<char> > buffer) = 0;
+};
+
+
+class Writer
+{
+    public:
+	virtual int write(std::shared_ptr<std::vector<char> > data) = 0;
+};
+
+class Closer
+{
+    public: 
+	virtual void close() = 0;
+};
+
+
+class ReadWriter
+{
+    public:
+	virtual bool read(std::shared_ptr<std::vector<char> > buffer) = 0;
+	virtual int write(std::shared_ptr<std::vector<char> > data) = 0;
+};
+
+class ReadWriteCloser
+{
+    public:
+	virtual bool read(std::shared_ptr<std::vector<char> > buffer) = 0;
+	virtual int write(std::shared_ptr<std::vector<char> > data) = 0;
+	virtual void close() = 0;
+};
 
 /*
  * File class represents an actual file we can read and write to.
  */
 
-class File {
+class File : public ReadWriteCloser {
 
     private:
 	int				m_size;
@@ -24,7 +58,10 @@ class File {
     public:
 	std::shared_ptr<std::fstream>	m_file;
 
-	void read(std::unique_ptr<std::vector<char> > buffer);
+	bool read(std::shared_ptr<std::vector<char> > buffer);
+	int write(std::shared_ptr<std::vector<char> > data);
+	void close(); 
+
 	int size();
 	std::string name();
 	std::vector<char> data();

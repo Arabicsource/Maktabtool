@@ -6,7 +6,7 @@
 #include "File.h"
 
 
-File::File() noexcept
+File::File() 
 {
     std::shared_ptr<std::fstream> m_file(nullptr);
     int m_size(0);
@@ -41,11 +41,16 @@ std::shared_ptr<File> File::open(std::string path, std::ios_base::openmode mode)
 
 
 // read reads the file's content into a buffer passed as a parameter
-void File::read(std::unique_ptr<std::vector<char>> buffer)
+bool File::read(std::shared_ptr<std::vector<char> > buffer)
 {
 
+    // resize the buffer to the actual size of the data in order
+    // so that we can copy it into the buffer.
     buffer->resize(this->m_size, 0);
     buffer->swap(this->m_data);
+
+
+    return true;
 
 }
 
